@@ -1,0 +1,10 @@
+O sistema possui validação de campos (local superior) e validação campo a campo (não precisad de fragmento). As validações são feitas de duas formas através do ValidationMessages.properties e o sistema também possui uma página para o fragmento de validação.
+
+StringToDateConverter - Data de saída com formato errado
+
+Campos de cidade, nome - colocar para não digitar números
+
+API para Cep
+https://viacep.com.br/exemplo/jquery/
+
+Ordenação em todas as páginas

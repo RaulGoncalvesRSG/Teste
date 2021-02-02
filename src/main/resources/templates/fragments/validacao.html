@@ -1,0 +1,21 @@
+<html>
+<head><meta charset="UTF-8"></head>
+<body>
+	<!--#fields.hasAnyErrors() verifica se existe algum campo do formulário q foi validado e n foi passado -->
+ 	<div th:if="${#fields.hasAnyErrors()}" th:fragment="validacao">	
+ 			<!-- A tag <div> define a cor do componente que vai conter o símbolo e a msg -->
+		  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<!-- Para mostrar as msgs na pag, é preciso usar o método detailedErrors() do objeto fields -->
+		  <div th:each="error : ${#fields.detailedErrors()}">
+		  	<!-- A tag "i" fica o símbolo do lado esquerdo -->
+		    <i class="oi oi-warning"></i>
+		  	<span th:text="${error.message}"></span>
+		  </div>
+		  <!-- Possui o botão de fechar a msg do alert -->
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+	</div>			
+</body>
+</html>	

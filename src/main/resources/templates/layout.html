@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Spring-Boot Básico</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<link rel="icon" href="/image/favicon.png" />
+
+	<!-- Bootstrap core CSS -->
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- Incluindo o fragmento "cabecalho" na pagina de layout 
+	fragments é o ditetório, header é o nome da pág e "cabecalho" é o nome do fragmento -->
+	<header th:replace="fragments/header :: cabecalho">
+		<div>header</div>
+	</header>
+	
+	<div  class="layout-main">
+		<aside>
+			<nav th:replace="fragments/sidebar :: nav-sidebar">
+				<span>menu</span>
+			</nav>
+		</aside>
+		
+		<!-- Corpo princopal das páginas -->
+		<!--section: Parte da página onde é modificado de acordo com a opção. Conteúdo principal das páginas-->
+		<section layout:fragment="corpo">
+			<div>conteudo principal das páginas</div>
+		</section>
+	</div>
+	
+	<!-- footer: referente ao rodapé -->
+	<footer th:replace="fragments/footer :: rodape">
+		<div>footer</div>
+	</footer>
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	
+		var url = '';
+		<!-- "id*" para saber q está analisando um valor de um id. Sempre quando clicar em um botão com id -->
+		<!--q possui a inicial (btn_) irá cair nesta função. Quando clica no botão, abre a janela do modal -->
+		$('button[id*="btn_"]').click(function() {
+			<!--O split faz a divisão da str em duas partes, 1° do lado esq do "_" e a outra do lado dir -->
+			<!-- ['btn', 'departamentos/excluir/5'] -->
+			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+		});
+	
+		<!--"ok_confirm" é um ID do modal -->
+		$('#ok_confirm').click(function(){
+		<!-- Esse comando faz uma solicitação para o servidor a partir da url q estamos atribuindi à ela-->
+			document.location.href = url;
+		});
+	    
+		<!--popover para abrir o visualizador de endereço -->
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+		
+		$(document).ready(function(){
+		    $(".navbar-toggle").click(function(){
+		        $(".sidebar").toggleClass("sidebar-open");
+		    })
+		});
+
+		$(document).ready(function(){
+		    // fecha o alert após 5s
+		    setTimeout(function () {          
+		          $('.alert-dismissible').alert('close');
+		    }, 5000);
+		});
+	</script>
+	
+</body>
+</html>
